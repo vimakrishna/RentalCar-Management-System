@@ -1,0 +1,174 @@
+
+###
+POST http://127.0.0.1:8000/register/
+Content-Type: application/json
+
+{
+    "first_name": "Vimal",
+    "last_name": "Krishna",
+    "username": "vimal",
+    "email": "vimal@gmail.com",
+    "password": "vimal123"
+}
+
+###
+GET http://127.0.0.1:8000/users/
+Authorization: Basic vimal:vimal123
+
+###
+POST http://127.0.0.1:8000/cars/
+Content-Type: application/json
+Authorization: Basic vimalkrishna:vimal123
+
+{
+    "car_name": "LAND CRUISER",
+    "brand": "TOYOTA",
+    "model": "2008",
+    "registration_number": "KL29AB2255",
+    "fuel_type": "petrol",
+    "seating_capacity": 5,
+    "rent_per_day":15000,
+    "available": true
+}
+
+###
+GET http://127.0.0.1:8000/cars/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/cars/1/
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/cars/1/
+Content-Type: application/json
+Authorization: Basic vimalkrishna:vimal123
+Accept: application/json
+
+{
+    "car_name": "Swift Dzire",
+    "brand": "Maruti Suzuki",
+    "model": "2025",
+    "registration_number": "KL29AB1234",
+    "fuel_type": "Petrol",
+    "seating_capacity": 5,
+    "rent_per_day": 1800,
+    "available": true
+}
+
+###
+DELETE http://127.0.0.1:8000/cars/1/
+Authorization: Basic admin:admin123
+Accept: application/json
+
+###
+POST http://127.0.0.1:8000/bookings/
+Content-Type: application/json
+Authorization: Basic vimal:vimal123
+Accept: application/json
+
+{
+    "car": 1,
+    "pickup_date": "2026-12-03",
+    "return_date": "2026-12-04",
+    "pickup_location": "Wonderla"
+}
+
+###
+GET http://127.0.0.1:8000/bookings/
+Authorization: Basic vimal:vimal123
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/bookings/1/
+Authorization: Basic vimal:vimal123
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/bookings/3/
+Content-Type: application/json
+Authorization: Basic vimal:vimal123
+Accept: application/json
+
+{
+    "car": 1,
+    "pickup_date": "2026-12-02",
+    "return_date": "2026-12-03",
+    "pickup_location": "wonderla kakkaanad"
+}
+
+###
+DELETE http://127.0.0.1:8000/bookings/1/
+Authorization: Basic vimal:vimal123
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/bookings/2/status/
+Content-Type: application/json
+Authorization: Basic vimalkrishna:vimal123
+Accept: application/json
+
+{
+    "status": "confirmed"
+}
+
+###
+PUT http://127.0.0.1:8000/bookings/3/status/
+Content-Type: application/json
+Authorization: Basic vimalkrishna:vimal123
+Accept: application/json
+
+{
+    "status": "rejected"
+}
+
+
+### Search by car name
+GET http://127.0.0.1:8000/cars/?search=Swift
+Accept: application/json
+
+
+### Search by brand
+GET http://127.0.0.1:8000/cars/?search=KIA
+Accept: application/json
+
+
+### Filter by fuel type
+GET http://127.0.0.1:8000/cars/?fuel_type=Petrol
+Accept: application/json
+
+
+### Filter by maximum rent
+GET http://127.0.0.1:8000/cars/?max_rent=2000
+Accept: application/json
+
+
+### Search and multiple filters
+GET http://127.0.0.1:8000/cars/?search=KIA&fuel_type=Petrol&max_rent=2000
+Accept: application/json
+
+
+### Invalid rent test
+GET http://127.0.0.1:8000/cars/?max_rent=2000
+Accept: application/json
+
+
+###
+# Low rent to high rent
+GET http://127.0.0.1:8000/cars/?ordering=rent_per_day
+Accept: application/json
+
+###
+# High rent to low rent
+GET http://127.0.0.1:8000/cars/?ordering=-rent_per_day
+Accept: application/json
+
+###
+# Sort by car name
+GET http://127.0.0.1:8000/cars/?ordering=car_name
+Accept: application/json
+
+###
+# Sort by seating capacity
+GET http://127.0.0.1:8000/cars/?ordering=seating_capacity
+Accept: application/json
